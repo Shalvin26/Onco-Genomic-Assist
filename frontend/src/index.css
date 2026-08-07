@@ -1,0 +1,94 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --radius: 0.625rem;
+
+  /* Healing green palette */
+  --green-100: #A8D5BA;
+  --green-300: #6BBF8A;
+  --green-500: #4B9B6E;
+  --green-700: #2E7D5C;
+  --green-900: #1B5E3A;
+
+  --background: #FAFBFA;
+  --foreground: #1C2B22;
+  --card: #FFFFFF;
+  --card-foreground: #1C2B22;
+  --popover: #FFFFFF;
+  --popover-foreground: #1C2B22;
+  --primary: var(--green-700);
+  --primary-foreground: #FAFBFA;
+  --secondary: var(--green-100);
+  --secondary-foreground: var(--green-900);
+  --muted: #EFF4F1;
+  --muted-foreground: #5B6B62;
+  --accent: var(--green-500);
+  --accent-foreground: #FAFBFA;
+  --destructive: #C0392B;
+  --border: #DDE7E1;
+  --input: #DDE7E1;
+  --ring: var(--green-500);
+}
+
+.dark {
+  --background: #12201A;
+  --foreground: #E7F0EA;
+  --card: #17271F;
+  --card-foreground: #E7F0EA;
+  --popover: #17271F;
+  --popover-foreground: #E7F0EA;
+  --primary: var(--green-300);
+  --primary-foreground: #12201A;
+  --secondary: #1F3328;
+  --secondary-foreground: #E7F0EA;
+  --muted: #1B2D24;
+  --muted-foreground: #9AB3A5;
+  --accent: var(--green-500);
+  --accent-foreground: #12201A;
+  --destructive: #E57368;
+  --border: #24392F;
+  --input: #24392F;
+  --ring: var(--green-500);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-green-100: var(--green-100);
+  --color-green-300: var(--green-300);
+  --color-green-500: var(--green-500);
+  --color-green-700: var(--green-700);
+  --color-green-900: var(--green-900);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
