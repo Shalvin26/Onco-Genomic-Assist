@@ -82,12 +82,17 @@ export default function PatientDetail() {
             Clinical Notes
           </p>
 
-          <div className="flex gap-2 mb-4">
-            <input
+          <div className="flex gap-2 mb-4 items-end">
+            <textarea
               value={newNote}
               onChange={(e) => setNewNote(e.target.value)}
+              onInput={(e) => {
+                e.target.style.height = 'auto';
+                e.target.style.height = `${e.target.scrollHeight}px`;
+              }}
               placeholder="Add a note for today's visit..."
-              className="flex-1 rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring"
+              rows={1}
+              className="flex-1 resize-none rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring max-h-40 overflow-y-auto"
             />
             <Button onClick={handleAddNote} disabled={addingNote || !newNote.trim()}>
               {addingNote ? 'Adding...' : 'Add'}
