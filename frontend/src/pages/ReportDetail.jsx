@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import api from '@/lib/api';
 import Layout from '@/components/Layout';
@@ -144,9 +144,9 @@ export default function ReportDetail() {
 
   return (
     <Layout>
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">{report.originalFileName}</h1>
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+        <div className="min-w-0">
+          <h1 className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-slate-100 break-words">{report.originalFileName}</h1>
           <a href={report.filePath} target="_blank" rel="noreferrer" className="text-sm text-primary hover:underline">
             View original PDF
           </a>
@@ -201,20 +201,14 @@ export default function ReportDetail() {
                 whileHover={{ y: -2 }}
               >
                 <div>
-                  <motion.span
-                    layoutId={`gene-rank-${i}`}
-                    className="absolute top-3.5 right-3.5 text-[11px] font-mono font-medium px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200/80 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700"
-                  >
+                  <span className="absolute top-3.5 right-3.5 text-[11px] font-mono font-medium px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200/80 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700">
                     #{i + 1}
-                  </motion.span>
+                  </span>
 
                   <div className="flex items-center justify-between mb-2 pr-8">
-                    <motion.h3
-                      layoutId={`gene-title-${i}`}
-                      className="text-lg font-semibold text-slate-900 dark:text-slate-100 tracking-tight"
-                    >
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100 tracking-tight">
                       {gene.geneName}
-                    </motion.h3>
+                    </h3>
                   </div>
 
                   {gene.statusBadge && (
@@ -230,7 +224,7 @@ export default function ReportDetail() {
                   )}
 
                   {gene.clinicalSignificance && (
-                    <motion.div layoutId={`gene-badge-${i}`} className="mb-2.5">
+                    <div className="mb-2.5">
                       <span
                         className={`text-[11px] font-medium px-2.5 py-0.5 rounded-md border inline-block ${getBadgeStyle(
                           gene.clinicalSignificance
@@ -238,24 +232,18 @@ export default function ReportDetail() {
                       >
                         {gene.clinicalSignificance}
                       </span>
-                    </motion.div>
+                    </div>
                   )}
 
                   {(gene.codingChange || gene.proteinChange) && (
-                    <motion.p
-                      layoutId={`gene-coding-${i}`}
-                      className="font-mono text-xs text-slate-500 dark:text-slate-400 mb-2 truncate bg-slate-50 dark:bg-slate-900/50 px-2 py-1 rounded border border-slate-100 dark:border-slate-800"
-                    >
+                    <p className="font-mono text-xs text-slate-500 dark:text-slate-400 mb-2 truncate bg-slate-50 dark:bg-slate-900/50 px-2 py-1 rounded border border-slate-100 dark:border-slate-800">
                       {[gene.codingChange, gene.proteinChange].filter(Boolean).join(' | ')}
-                    </motion.p>
+                    </p>
                   )}
 
-                  <motion.p
-                    layoutId={`gene-summary-${i}`}
-                    className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3"
-                  >
+                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3">
                     {gene.clinicalSummary || gene.aiSummary}
-                  </motion.p>
+                  </p>
                 </div>
               </motion.div>
             ))}
@@ -276,7 +264,7 @@ export default function ReportDetail() {
                 <motion.div
                   layoutId={`gene-card-${activeGeneIndex}`}
                   transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                  className="bg-card border border-border rounded-2xl p-7 max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl z-10 relative"
+                  className="bg-card border border-border rounded-2xl p-5 sm:p-7 max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl z-10 relative"
                 >
                   <ExpandedGeneContent
                     index={activeGeneIndex}
@@ -301,27 +289,21 @@ function ExpandedGeneContent({ index, gene, onClose }) {
   return (
     <div className="space-y-5">
       {/* Header */}
-      <div className="flex items-start justify-between border-b border-border/60 pb-3">
-        <div className="flex items-center gap-3">
-          <motion.h3
-            layoutId={`gene-title-${index}`}
-            className="text-2xl font-semibold text-slate-900 dark:text-slate-100 tracking-tight"
-          >
+      <div className="flex flex-wrap items-start justify-between gap-2 border-b border-border/60 pb-3">
+        <div className="flex items-center gap-3 min-w-0">
+          <h3 className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-slate-100 tracking-tight break-words">
             {gene.geneName}
-          </motion.h3>
+          </h3>
 
-          <motion.span
-            layoutId={`gene-rank-${index}`}
-            className="text-xs font-mono font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200/80 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700"
-          >
+          <span className="text-xs font-mono font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200/80 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700 shrink-0">
             #{index + 1}
-          </motion.span>
+          </span>
         </div>
 
         <button
           onClick={onClose}
           aria-label="Close modal"
-          className="text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 text-xl leading-none p-1 rounded-md transition-colors"
+          className="text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 text-xl leading-none p-1 rounded-md transition-colors shrink-0"
         >
           ✕
         </button>
@@ -372,7 +354,7 @@ function ExpandedGeneContent({ index, gene, onClose }) {
           )}
 
           {gene.clinicalSignificance && (
-            <motion.div layoutId={`gene-badge-${index}`}>
+            <div>
               <span
                 className={`text-xs font-medium px-2.5 py-1 rounded-md border inline-block ${getBadgeStyle(
                   gene.clinicalSignificance
@@ -380,7 +362,7 @@ function ExpandedGeneContent({ index, gene, onClose }) {
               >
                 Reported Significance: {gene.clinicalSignificance}
               </span>
-            </motion.div>
+            </div>
           )}
         </div>
 
@@ -414,12 +396,9 @@ function ExpandedGeneContent({ index, gene, onClose }) {
         <p className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1.5">
           Clinical Summary
         </p>
-        <motion.p
-          layoutId={`gene-summary-${index}`}
-          className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed max-w-prose whitespace-pre-line"
-        >
+        <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed max-w-prose whitespace-pre-line">
           {gene.clinicalSummary || gene.aiSummary}
-        </motion.p>
+        </p>
       </div>
 
       {/* Evidence Summary */}
@@ -461,18 +440,18 @@ function ExpandedGeneContent({ index, gene, onClose }) {
                   key={j}
                   className="text-xs p-3 rounded-lg bg-slate-50 dark:bg-slate-900/30 border border-slate-200/60 dark:border-slate-800 space-y-2"
                 >
-                  <div className="flex justify-between items-center">
+                  <div className="flex flex-wrap justify-between items-center gap-1">
                     {evidenceUrl ? (
                       <a
                         href={evidenceUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-primary hover:underline font-semibold"
+                        className="text-primary hover:underline font-semibold break-all"
                       >
                         [{e.source || 'ClinVar'}] Variation ID: {e.variationId || gene.clinvarId || 'Matched'} ↗
                       </a>
                     ) : (
-                      <span className="font-semibold text-slate-700 dark:text-slate-300">
+                      <span className="font-semibold text-slate-700 dark:text-slate-300 break-all">
                         [{e.source || 'ClinVar'}] Variation ID: {e.variationId || 'Matched'}
                       </span>
                     )}
