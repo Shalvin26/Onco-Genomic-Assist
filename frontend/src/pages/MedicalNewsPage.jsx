@@ -122,7 +122,7 @@ export default function MedicalNewsPage() {
           disabled={syncing}
           className="text-xs h-9 w-full sm:w-auto shrink-0"
         >
-          {syncing ? 'Syncing...' : '🔄 Sync Latest PubMed & NIH'}
+          {syncing ? 'Syncing...' : 'Sync Latest PubMed & NIH'}
         </Button>
       </div>
 
