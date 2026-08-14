@@ -34,24 +34,29 @@ export default function Patients() {
 
   return (
     <Layout>
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-semibold text-foreground">Patients</h1>
-        <Button onClick={() => setShowForm(true)}>+ New Patient</Button>
+      {/* Top Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
+        <h1 className="text-xl sm:text-2xl font-semibold text-foreground">Patients</h1>
+        <Button onClick={() => setShowForm(true)} className="w-full sm:w-auto shrink-0">
+          + New Patient
+        </Button>
       </div>
 
-      <form onSubmit={handleSearch} className="mb-6">
+      {/* Search Bar */}
+      <form onSubmit={handleSearch} className="mb-4 sm:mb-6">
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search patients by name..."
-          className="w-full max-w-sm rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring"
+          className="w-full sm:max-w-sm rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring"
         />
       </form>
 
+      {/* Patients List */}
       {loading ? (
-        <p className="text-muted-foreground text-sm">Loading...</p>
+        <p className="text-muted-foreground text-sm py-4">Loading...</p>
       ) : patients.length === 0 ? (
-        <p className="text-muted-foreground text-sm">No patients found.</p>
+        <p className="text-muted-foreground text-sm py-4">No patients found.</p>
       ) : (
         <>
           <div className="space-y-2">
@@ -59,45 +64,57 @@ export default function Patients() {
               <Link
                 key={patient._id}
                 to={`/patients/${patient._id}`}
-                className="block bg-card border border-border rounded-lg p-4 hover:border-primary transition-colors"
+                className="block bg-card border border-border rounded-lg p-3.5 sm:p-4 hover:border-primary transition-colors shadow-sm"
               >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="font-medium text-foreground">{patient.name}</p>
-                    <p className="text-sm text-muted-foreground">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="min-w-0 flex-1">
+                    <p className="font-medium text-foreground truncate text-sm sm:text-base">
+                      {patient.name}
+                    </p>
+                    <p className="text-xs sm:text-sm text-muted-foreground truncate">
                       {patient.age ? `${patient.age} yrs` : ''} {patient.gender !== 'unspecified' ? `· ${patient.gender}` : ''}
                       {patient.patientIdentifier ? ` · ${patient.patientIdentifier}` : ''}
                     </p>
                   </div>
+                  <span className="text-xs text-muted-foreground shrink-0 font-medium sm:hidden">
+                    View →
+                  </span>
                 </div>
               </Link>
             ))}
           </div>
 
-          <div className="flex items-center gap-2 mt-6">
-            <Button
-              variant="outline"
-              size="sm"
-              disabled={page <= 1}
-              onClick={() => setPage((p) => p - 1)}
-            >
-              Previous
-            </Button>
-            <span className="text-sm text-muted-foreground">
+          {/* Pagination Controls */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mt-6 bg-card border border-border rounded-lg p-3 sm:p-4 shadow-sm">
+            <span className="text-xs sm:text-sm text-muted-foreground order-2 sm:order-1">
               Page {page} of {totalPages}
             </span>
-            <Button
-              variant="outline"
-              size="sm"
-              disabled={page >= totalPages}
-              onClick={() => setPage((p) => p + 1)}
-            >
-              Next
-            </Button>
+
+            <div className="flex items-center justify-center gap-2 w-full sm:w-auto order-1 sm:order-2">
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={page <= 1}
+                onClick={() => setPage((p) => p - 1)}
+                className="flex-1 sm:flex-none text-xs sm:text-sm"
+              >
+                Previous
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={page >= totalPages}
+                onClick={() => setPage((p) => p + 1)}
+                className="flex-1 sm:flex-none text-xs sm:text-sm"
+              >
+                Next
+              </Button>
+            </div>
           </div>
         </>
       )}
 
+      {/* Responsive New Patient Modal */}
       {showForm && (
         <NewPatientModal
           onClose={() => setShowForm(false)}
@@ -133,9 +150,9 @@ function NewPatientModal({ onClose, onCreated }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
-      <div className="bg-card border border-border rounded-lg p-6 w-full max-w-sm">
-        <h2 className="text-lg font-semibold text-foreground mb-4">New Patient</h2>
+    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4 overflow-y-auto">
+      <div className="bg-card border border-border rounded-lg p-5 sm:p-6 w-full max-w-sm max-h-[90vh] overflow-y-auto shadow-lg">
+        <h2 className="text-base sm:text-lg font-semibold text-foreground mb-4">New Patient</h2>
         <form onSubmit={handleSubmit} className="space-y-3">
           <input
             name="name"
@@ -172,7 +189,7 @@ function NewPatientModal({ onClose, onCreated }) {
             className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring"
           />
 
-          {error && <p className="text-sm text-destructive">{error}</p>}
+          {error && <p className="text-xs sm:text-sm text-destructive">{error}</p>}
 
           <div className="flex gap-2 pt-2">
             <Button type="submit" disabled={submitting} className="flex-1">

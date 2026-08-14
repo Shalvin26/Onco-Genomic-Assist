@@ -45,7 +45,7 @@ export default function MedicalNewsPage() {
   const [syncing, setSyncing] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTag, setSelectedTag] = useState('All');
-  
+
   // Server-side Pagination States
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -105,12 +105,12 @@ export default function MedicalNewsPage() {
   return (
     <Layout>
       {/* Top Header */}
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
         <div>
           <Link to="/dashboard" className="text-xs text-primary hover:underline font-mono mb-1 inline-block">
             ← Back to Dashboard
           </Link>
-          <h1 className="text-2xl font-semibold text-foreground flex items-center gap-2">
+          <h1 className="text-xl sm:text-2xl font-semibold text-foreground flex items-center gap-2">
             <span></span> Oncology & Genomic News Directory
           </h1>
         </div>
@@ -120,29 +120,29 @@ export default function MedicalNewsPage() {
           variant="outline"
           onClick={handleSync}
           disabled={syncing}
-          className="text-xs h-9"
+          className="text-xs h-9 w-full sm:w-auto shrink-0"
         >
           {syncing ? 'Syncing...' : '🔄 Sync Latest PubMed & NIH'}
         </Button>
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-3 mb-6 bg-card border border-border rounded-xl p-3 shadow-sm">
+      <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 mb-6 bg-card border border-border rounded-xl p-3 shadow-sm">
         <input
           type="text"
           placeholder="Search by keyword (e.g., immunotherapy, cancer)..."
           value={searchTerm}
           onChange={handleSearchChange}
-          className="w-full md:w-80 px-3 py-1.5 text-xs bg-background border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-primary"
+          className="w-full lg:w-80 px-3 py-2 text-xs bg-background border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-primary"
         />
 
         {/* Tag Category Filters */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 lg:pb-0 scrollbar-none">
           {['All', 'Research', 'Clinical Trial'].map((tag) => (
             <button
               key={tag}
               onClick={() => handleTagChange(tag)}
-              className={`text-xs px-2.5 py-1.5 rounded-lg border font-medium transition-colors ${
+              className={`text-xs px-3 py-1.5 rounded-lg border font-medium transition-colors shrink-0 ${
                 selectedTag === tag
                   ? 'bg-primary text-primary-foreground border-primary'
                   : 'bg-background text-muted-foreground border-border hover:border-slate-400'
@@ -166,21 +166,21 @@ export default function MedicalNewsPage() {
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-6">
           {news.map((item) => (
             <article
               key={item._id || item.externalId}
-              className="bg-card border border-border rounded-xl p-5 flex flex-col justify-between hover:border-slate-400 transition-colors shadow-sm"
+              className="bg-card border border-border rounded-xl p-4 sm:p-5 flex flex-col justify-between hover:border-slate-400 transition-colors shadow-sm"
             >
               <div className="space-y-2.5">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded border bg-rose-50 text-rose-800 border-rose-200 dark:bg-rose-950/50 dark:text-rose-300 dark:border-rose-900">
+                  <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded border bg-rose-50 text-rose-800 border-rose-200 dark:bg-rose-950/50 dark:text-rose-300 dark:border-rose-900 shrink-0">
                     {item.tag || 'Medical Update'}
                   </span>
-                  <span className="text-[11px] text-muted-foreground font-mono">{item.publishedAt}</span>
+                  <span className="text-[11px] text-muted-foreground font-mono shrink-0">{item.publishedAt}</span>
                 </div>
 
-                <h2 className="text-base font-semibold text-foreground leading-snug">
+                <h2 className="text-sm sm:text-base font-semibold text-foreground leading-snug">
                   {item.title}
                 </h2>
 
@@ -189,13 +189,13 @@ export default function MedicalNewsPage() {
                 </p>
               </div>
 
-              <div className="pt-3 mt-4 border-t border-border/50 flex items-center justify-between text-[11px] text-muted-foreground">
-                <span className="font-medium truncate max-w-40">{item.source}</span>
+              <div className="pt-3 mt-4 border-t border-border/50 flex items-center justify-between gap-2 text-[11px] text-muted-foreground">
+                <span className="font-medium truncate max-w-[50%] sm:max-w-40">{item.source}</span>
                 <a
                   href={item.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-primary hover:underline font-medium flex items-center gap-0.5"
+                  className="text-primary hover:underline font-medium flex items-center gap-0.5 shrink-0"
                 >
                   Read full paper ↗
                 </a>
@@ -207,8 +207,8 @@ export default function MedicalNewsPage() {
 
       {/* Server-Side Pagination Controls */}
       {totalPages > 1 && (
-        <div className="flex items-center justify-between bg-card border border-border rounded-xl p-3">
-          <p className="text-xs text-muted-foreground">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-card border border-border rounded-xl p-3 shadow-sm">
+          <p className="text-xs text-muted-foreground text-center sm:text-left">
             Showing <span className="font-semibold text-foreground">{(currentPage - 1) * ITEMS_PER_PAGE + 1}</span> to{' '}
             <span className="font-semibold text-foreground">
               {Math.min(currentPage * ITEMS_PER_PAGE, totalItems)}
@@ -216,18 +216,18 @@ export default function MedicalNewsPage() {
             of <span className="font-semibold text-foreground">{totalItems}</span> articles
           </p>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-center gap-2 w-full sm:w-auto">
             <Button
               size="sm"
               variant="outline"
               onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
               disabled={currentPage === 1 || loading}
-              className="text-xs h-8 px-3"
+              className="text-xs h-8 px-3 flex-1 sm:flex-none"
             >
               Previous
             </Button>
 
-            <span className="text-xs font-medium px-2">
+            <span className="text-xs font-medium px-2 shrink-0">
               Page {currentPage} of {totalPages}
             </span>
 
@@ -236,7 +236,7 @@ export default function MedicalNewsPage() {
               variant="outline"
               onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
               disabled={currentPage === totalPages || loading}
-              className="text-xs h-8 px-3"
+              className="text-xs h-8 px-3 flex-1 sm:flex-none"
             >
               Next
             </Button>
