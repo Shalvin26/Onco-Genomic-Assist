@@ -130,7 +130,7 @@ export default function PatientDetail() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
         <h2 className="text-base sm:text-lg font-semibold text-foreground">Reports</h2>
         <label className="w-full sm:w-auto">
-          <Button asChild disabled={uploading} className="w-full sm:w-auto">
+          <Button asChild disabled={uploading} className="w-full sm:w-auto cursor-pointer">
             <span>{uploading ? 'Uploading...' : '+ Upload Report'}</span>
           </Button>
           <input type="file" accept="application/pdf" onChange={handleUpload} className="hidden" />
@@ -148,22 +148,16 @@ export default function PatientDetail() {
             <Link
               key={report._id}
               to={`/reports/${report._id}`}
-              className="block bg-card border border-border rounded-lg p-3.5 sm:p-4 hover:border-primary transition-colors shadow-sm"
+              className="group block bg-card border border-border rounded-lg p-3.5 sm:p-4 hover:border-primary transition-all shadow-sm"
             >
               <div className="flex items-center justify-between gap-3">
                 <p className="font-medium text-foreground text-xs sm:text-sm truncate min-w-0 flex-1">
                   {report.originalFileName}
                 </p>
-                <span
-                  className={`text-[10px] sm:text-xs px-2 py-0.5 rounded-full font-medium shrink-0 capitalize ${
-                    report.status === 'analyzed'
-                      ? 'bg-green-100 text-green-900 dark:bg-green-950/60 dark:text-green-300'
-                      : report.status === 'failed'
-                      ? 'bg-destructive/10 text-destructive'
-                      : 'bg-muted text-muted-foreground'
-                  }`}
-                >
-                  {report.status}
+                
+                {/* Actionable Click Badge */}
+                <span className="text-[10px] sm:text-xs px-3 py-1 rounded-full font-medium shrink-0 bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors shadow-xs">
+                  Click here for analysis →
                 </span>
               </div>
             </Link>

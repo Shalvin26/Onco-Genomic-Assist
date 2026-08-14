@@ -33,7 +33,7 @@ export default function Layout({ children }) {
           </div>
 
           <div className="hidden sm:flex items-center gap-4">
-            <span className="text-sm text-muted-foreground">Dr. {doctor?.name}</span>
+            <span className="text-sm text-muted-foreground">{doctor?.name}</span>
             <Button variant="outline" size="sm" onClick={handleLogout}>
               Log out
             </Button>
