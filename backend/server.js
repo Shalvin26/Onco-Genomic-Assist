@@ -1,6 +1,6 @@
 // server.js
 require('dotenv').config();
-console.log('CLIENT_ORIGIN is:', process.env.CLIENT_ORIGIN);
+ . 
 
 const app = require('./app');
 const connectDB = require('./config/db');
