@@ -36,10 +36,10 @@ export default function Register() {
   };
 
   return (
-   <div className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden bg-gradient-to-br from-green-100 via-background to-green-300/40">
+    <div className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden bg-gradient-to-br from-green-100 via-background to-green-300/40">
       <Link
         to="/"
-      className="absolute top-6 left-6 z-10 text-sm font-medium text-foreground bg-card/80 backdrop-blur-sm border border-border rounded-full px-3 py-1.5 hover:bg-card transition-colors flex items-center gap-1 shadow-sm"
+        className="absolute top-6 left-6 z-10 text-sm font-medium text-foreground md:bg-card/80 md:backdrop-blur-sm md:border md:border-border rounded-full px-3 py-1.5 md:hover:bg-card transition-colors flex items-center gap-1 md:shadow-sm hover:underline md:hover:no-underline"
       >
         ← Back to home
       </Link>
@@ -63,11 +63,10 @@ export default function Register() {
         className="relative w-full max-w-sm"
       >
         <div className="flex items-center justify-center gap-2 mb-6">
-          
           <span className="text-lg font-semibold text-foreground tracking-tight">OncoGenomic Assist</span>
         </div>
 
-      <div className="bg-card/90 backdrop-blur-md border-2 border-grey-700 rounded-xl p-8 shadow-xl">
+        <div className="bg-card/90 backdrop-blur-md border-2 border-grey-700 rounded-xl p-8 shadow-xl">
           <h1 className="text-2xl font-semibold text-foreground mb-1">Create your account</h1>
           <p className="text-muted-foreground text-sm mb-6">For doctors and cancer researchers</p>
 

@@ -30,18 +30,18 @@ export default function Login() {
     <div className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden bg-gradient-to-br from-green-100 via-background to-green-300/40">
       <Link
         to="/"
-      className="absolute top-6 left-6 z-10 text-sm font-medium text-foreground bg-card/80 backdrop-blur-sm border border-border rounded-full px-3 py-1.5 hover:bg-card transition-colors flex items-center gap-1 shadow-sm"
+        className="absolute top-6 left-6 z-10 text-sm font-medium text-foreground md:bg-card/80 md:backdrop-blur-sm md:border md:border-border rounded-full px-3 py-1.5 md:hover:bg-card transition-colors flex items-center gap-1 md:shadow-sm hover:underline md:hover:no-underline"
       >
         ← Back to home
       </Link>
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
-         animate={{ scale: [1, 1.15, 1], opacity: [0.2, 0.35, 0.2] }}
+          animate={{ scale: [1, 1.15, 1], opacity: [0.2, 0.35, 0.2] }}
           transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
           className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-green-300/30 blur-3xl"
         />
         <motion.div
-        animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.3, 0.15] }}
+          animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.3, 0.15] }}
           transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut', delay: 1.2 }}
           className="absolute bottom-[-8rem] right-[-8rem] w-[26rem] h-[26rem] rounded-full bg-green-500/25 blur-3xl"
         />
@@ -54,11 +54,10 @@ export default function Login() {
         className="relative w-full max-w-sm"
       >
         <div className="flex items-center justify-center gap-2 mb-6">
-        
           <span className="text-lg font-semibold text-foreground tracking-tight">OncoGenomic Assist</span>
         </div>
 
-       <div className="bg-card/90 backdrop-blur-md border-2 border-grey-700 rounded-xl p-8 shadow-xl">
+        <div className="bg-card/90 backdrop-blur-md border-2 border-grey-700 rounded-xl p-8 shadow-xl">
           <h1 className="text-2xl font-semibold text-foreground mb-1">Welcome back</h1>
           <p className="text-muted-foreground text-sm mb-6">Log in to your doctor account</p>
 
@@ -69,7 +68,7 @@ export default function Login() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="xyz.123@gmailcom"
+                placeholder="xyz.123@gmail.com"
                 required
                 className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring transition-all duration-200"
               />
