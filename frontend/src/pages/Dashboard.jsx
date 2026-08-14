@@ -168,7 +168,7 @@ export default function Dashboard() {
               disabled={syncingNews}
               className="text-xs h-8 flex-1 sm:flex-none"
             >
-              {syncingNews ? 'Syncing...' : '🔄 Refresh Feed'}
+              {syncingNews ? 'Syncing...' : 'Refresh Feed'}
             </Button>
 
             <Button size="sm" asChild className="text-xs h-8 flex-1 sm:flex-none">
